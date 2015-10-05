@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
+//import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ import android.provider.SearchRecentSuggestions;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.util.Linkify;
+//import android.view.inputmethod.InputMethodManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -137,6 +139,9 @@ public class pmTextEdit extends Activity
 		} catch (Exception e) {}
 		
 		updateOptions();
+
+                //InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                //inputManager.toggleSoftInput (InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
 		Intent intent = getIntent();    
 		newIntent(intent);
@@ -747,6 +752,12 @@ public class pmTextEdit extends Activity
 			editor.putBoolean("openingIntent", openingIntent);
 			editor.commit();
 		}
+
+                // View view = this.getCurrentFocus();
+                // if (view != null) {
+                //     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                //     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                // }
 	} // end onPause()
 
 	
@@ -761,13 +772,22 @@ public class pmTextEdit extends Activity
 			myResume();
 
 		fromIntent = false;
+
+                //System.out.println("............................ onResume() : Let's force show the keyboard!");
+                //text.requestFocus();
+
+                // This successfully re-opens the keyboard, but I'm currently looking for a way to avoid it being closed in the first place
+                //InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                //inputManager.toggleSoftInput (InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
 	}
 	
 	private void myResume()
 	{
 		try {
+
+                    // Darshan: This appears to be what caused the keyboard to disappear.  It shouldn't actually be necessary, I think, so this looks like a real solution.
 			// make sure the correct options are being used
-			updateOptions();
+                        //updateOptions();
 			
 			// load the previous text
 			SharedPreferences prefs = getPreferences(MODE_PRIVATE);
