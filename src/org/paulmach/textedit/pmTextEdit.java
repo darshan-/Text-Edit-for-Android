@@ -1539,13 +1539,13 @@ public class pmTextEdit extends Activity
 
 		menu.add(0, MENU_NEW_ID, 0, "New File").setShortcut('0', 'n').setIcon(R.drawable.icon_new);
 		menu.add(0, MENU_SAVE_ID, 0, "Save").setShortcut('0', 's').setIcon(R.drawable.icon_save);
-		menu.add(0, MENU_SAVEAS_ID, 0, "Save As").setIcon(R.drawable.icon_saveas);
+		//menu.add(0, MENU_SAVEAS_ID, 0, "Save As").setIcon(R.drawable.icon_saveas);
 		menu.add(0, MENU_OPEN_ID, 0, "Open").setShortcut('0', 'o').setIcon(R.drawable.icon_open);
-		menu.add(0, MENU_OPENRECENT_ID, 0, "Recent").setShortcut('0', 'r').setIcon(R.drawable.icon_openrecent);
+		//menu.add(0, MENU_OPENRECENT_ID, 0, "Recent").setShortcut('0', 'r').setIcon(R.drawable.icon_openrecent);
 		
-		menu.add(0, MENU_EMAIL, 0, "Email Text").setShortcut('0', 'e');
+		//menu.add(0, MENU_EMAIL, 0, "Email Text").setShortcut('0', 'e');
 		menu.add(0, MENU_SEARCH, 0, "Search Text").setShortcut('0', 'f');
-		menu.add(0, MENU_ATTACHMENT, 0, "Email as Attachment");
+		//menu.add(0, MENU_ATTACHMENT, 0, "Email as Attachment");
 		menu.add(0, MENU_OPTIONS_ID, 0, "Options").setIcon(R.drawable.icon_options);
 		return true;
 	} // end onCreateOptionsMenu()
