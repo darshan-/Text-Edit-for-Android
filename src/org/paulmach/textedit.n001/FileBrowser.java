@@ -1,4 +1,4 @@
-package org.paulmach.textedit;
+package org.paulmach.textedit.n001;
 
 import java.io.File;
 import java.util.Arrays;

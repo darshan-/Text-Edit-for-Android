@@ -23,14 +23,14 @@
 			android:title="Auto Link"  
 			android:summary="Links and phone numbers are clickable"
 			android:defaultValue="false" />
-		<org.paulmach.textedit.ClearSearchSuggestions  
+		<org.paulmach.textedit.n001.ClearSearchSuggestions  
 			android:key="clearsearch"
 			android:title="Clear Search Suggestions"  
 			android:summary="Click here to clear list of recent searches"
 			android:defaultValue="true" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Save/Open Preferences">
-		<org.paulmach.textedit.DefaultDirPreference  
+		<org.paulmach.textedit.n001.DefaultDirPreference  
 			android:name="Set Default Directory"
 			android:summary="Default save/open directory"
 			android:defaultValue="/sdcard/"
@@ -41,32 +41,32 @@
 			android:title="Autocomplete Filenames"  
 			android:summary="Autocomplete text when opening and saving files"
 			android:defaultValue="false" />  
-		<org.paulmach.textedit.ClearRecentFileListPreference  
+		<org.paulmach.textedit.n001.ClearRecentFileListPreference  
 			android:key="clearrecent"  
 			android:title="Clear Recent File List"  
 			android:summary="Click here to clear list of recently opened files"
 			android:defaultValue="true" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Appearance">  
-		<org.paulmach.textedit.FontTypePreference
+		<org.paulmach.textedit.n001.FontTypePreference
 			android:key="font"  
 			android:title="Font"  
 			android:summary="Choose a font type"  
 			android:dialogTitle="Choose a font type" 
 			android:defaultValue="Monospace" />
-		<org.paulmach.textedit.FontSizePreference
+		<org.paulmach.textedit.n001.FontSizePreference
 			android:key="fontsize"  
 			android:title="Font Size"
 			android:summary="Choose a font size"  
 			android:defaultValue="Medium"
 			android:dialogTitle="Choose a font size" />
-		<org.paulmach.textedit.ColorPreference
+		<org.paulmach.textedit.n001.ColorPreference
 			android:key="fontcolor"  
 			android:title="Font Color"
 			android:summary="Choose a font color"  
 			android:defaultValue="0xFFCCCCCC"
 			android:dialogTitle="Choose a font color" />
-		<org.paulmach.textedit.ColorPreference
+		<org.paulmach.textedit.n001.ColorPreference
 			android:key="bgcolor"
 			android:title="Background Color"
 			android:summary="Choose a background color"  
@@ -80,7 +80,7 @@
 	</PreferenceCategory>
 	
 	<PreferenceCategory android:title="Warranty Information">
-		<org.paulmach.textedit.WarrantyPreference
+		<org.paulmach.textedit.n001.WarrantyPreference
 			android:key="warrantyinfo"  
 			android:title="Warranty Information"  
 			android:summary="Just a little FYI on the warranty"

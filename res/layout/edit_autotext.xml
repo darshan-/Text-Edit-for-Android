@@ -17,7 +17,7 @@
 		android:layout_height="fill_parent"
 		android:fadingEdge="none">
 		<EditText xmlns:android="http://schemas.android.com/apk/res/android"
-			class="org.paulmach.textedit.pmTextEdit$CustomEditText"
+			class="org.paulmach.textedit.n001.pmTextEdit$CustomEditText"
 			android:id="@+id/note"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"

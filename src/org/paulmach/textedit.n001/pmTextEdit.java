@@ -1,4 +1,4 @@
-package org.paulmach.textedit;
+package org.paulmach.textedit.n001;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -143,8 +143,13 @@ public class pmTextEdit extends Activity
                 //InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 //inputManager.toggleSoftInput (InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-		Intent intent = getIntent();    
-		newIntent(intent);
+
+                // TODO: Create file if it doesn't exist.  Currently must manually create it before using app.
+                openFile(Uri.fromFile(new File("/mnt/sdcard/Nightly001")));
+
+
+		//Intent intent = getIntent();    
+		//newIntent(intent);
 	} // end onCreate()
 
 	/****************************************************************
@@ -1533,22 +1538,42 @@ public class pmTextEdit extends Activity
 	
 	/****************************************************************
 	 * menu Functions */	
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		super.onCreateOptionsMenu(menu);
+    // public boolean onCreateOptionsMenu(Menu menu) {
+    //     super.onCreateOptionsMenu(menu);
+    //     return true;
+    // }
+    
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        savingFile = true;
+        if (untitled) {
+            if (autoComplete)
+                showDialog(DIALOG_SAVE_FILE_AUTOCOMPLETE);
+            else
+                showDialog(DIALOG_SAVE_FILE);
+        } else {
+            saveNote(filename);
+        }
+        
+        return false;
+    }
+            
+		// super.onCreateOptionsMenu(menu);
 
-		menu.add(0, MENU_NEW_ID, 0, "New File").setShortcut('0', 'n').setIcon(R.drawable.icon_new);
-		menu.add(0, MENU_SAVE_ID, 0, "Save").setShortcut('0', 's').setIcon(R.drawable.icon_save);
-		//menu.add(0, MENU_SAVEAS_ID, 0, "Save As").setIcon(R.drawable.icon_saveas);
-		menu.add(0, MENU_OPEN_ID, 0, "Open").setShortcut('0', 'o').setIcon(R.drawable.icon_open);
-		//menu.add(0, MENU_OPENRECENT_ID, 0, "Recent").setShortcut('0', 'r').setIcon(R.drawable.icon_openrecent);
+		// menu.add(0, MENU_NEW_ID, 0, "New File").setShortcut('0', 'n').setIcon(R.drawable.icon_new);
+		// menu.add(0, MENU_SAVE_ID, 0, "Save").setShortcut('0', 's').setIcon(R.drawable.icon_save);
+		// menu.add(0, MENU_SAVE_ID, 0, "Save").setShortcut('0', 's').setIcon(R.drawable.icon_save);
+		// menu.add(0, MENU_SAVE_ID, 0, "Save").setShortcut('0', 's').setIcon(R.drawable.icon_save);
+		// //menu.add(0, MENU_SAVEAS_ID, 0, "Save As").setIcon(R.drawable.icon_saveas);
+		// menu.add(0, MENU_OPEN_ID, 0, "Open").setShortcut('0', 'o').setIcon(R.drawable.icon_open);
+		// //menu.add(0, MENU_OPENRECENT_ID, 0, "Recent").setShortcut('0', 'r').setIcon(R.drawable.icon_openrecent);
 		
-		//menu.add(0, MENU_EMAIL, 0, "Email Text").setShortcut('0', 'e');
-		menu.add(0, MENU_SEARCH, 0, "Search Text").setShortcut('0', 'f');
-		//menu.add(0, MENU_ATTACHMENT, 0, "Email as Attachment");
-		menu.add(0, MENU_OPTIONS_ID, 0, "Options").setIcon(R.drawable.icon_options);
-		return true;
-	} // end onCreateOptionsMenu()
+		// //menu.add(0, MENU_EMAIL, 0, "Email Text").setShortcut('0', 'e');
+		// menu.add(0, MENU_SEARCH, 0, "Search Text").setShortcut('0', 'f');
+		// //menu.add(0, MENU_ATTACHMENT, 0, "Email as Attachment");
+		// menu.add(0, MENU_OPTIONS_ID, 0, "Options").setIcon(R.drawable.icon_options);
+		// return true;
+    //} // end onCreateOptionsMenu()
 
 	public boolean onOptionsItemSelected(MenuItem item)
 	{

@@ -1,4 +1,4 @@
-package org.paulmach.textedit;
+package org.paulmach.textedit.n001;
 
 import android.content.Context;
 import android.preference.Preference;
