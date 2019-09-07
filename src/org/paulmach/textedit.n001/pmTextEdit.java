@@ -148,8 +148,8 @@ public class pmTextEdit extends Activity
                 openFile(Uri.fromFile(new File("/mnt/sdcard/Nightly001")));
 
 
-		//Intent intent = getIntent();    
-		//newIntent(intent);
+		Intent intent = getIntent();    
+		newIntent(intent);
 	} // end onCreate()
 
 	/****************************************************************
@@ -264,7 +264,8 @@ public class pmTextEdit extends Activity
 	 * createNew()
 	 * 		create a new file */
 	public void createNew()
-	{	
+	{
+            System.out.println("....................... createNew");
 		// set the new context
 		setContentView(R.layout.edit);	// update options done below
 
@@ -312,10 +313,12 @@ public class pmTextEdit extends Activity
 	 * 		opens a file, duh */
 	public void openFile(Uri mUri)
 	{
+            System.out.println("....................... openFile: " + mUri);
 		File ft = new File(mUri.getPath());
 		
 		if (ft.isFile()) {
 			openFile(mUri.getPath());
+                        System.out.println("....................... opened from getPath");
 			return;
 		}
 		
@@ -377,16 +380,19 @@ public class pmTextEdit extends Activity
 	 * 		opens a file, duh */
 	public void openFile(CharSequence fname)
 	{
+            System.out.println("....................... openFile: " + fname);
 		openingFile = false;
 		StringBuffer result = new StringBuffer();
 		
 		try {
+                    System.out.println("....................... openFile CS: try");
 			// open file
 			FileReader f = new FileReader(fname.toString());
 			File file = new File(fname.toString());
 			
 			if (f == null)
 			{
+                            System.out.println("....................... openFile CS: FNFE");
 				throw(new FileNotFoundException());
 			}
 
@@ -398,7 +404,8 @@ public class pmTextEdit extends Activity
 			// if the file has nothing in it there will be an exception here
 			// that actually isn't a problem
 			if (file.length() != 0 && !file.isDirectory())
-			{	
+			{
+                            System.out.println("....................... openFile CS: So far so good");
 				// using just FileReader now. Works better with weird file encoding
 				// Thanks to Ondrej Bojar <obo@cuni.cz> for finding the bug.
 				
@@ -411,6 +418,7 @@ public class pmTextEdit extends Activity
 				int read = 0;
 
 				do {
+                                    System.out.println("....................... openFile CS: Reading...");
 					read = f.read(buffer, 0, 1000);
 					
 					if (read >= 0)
@@ -418,6 +426,7 @@ public class pmTextEdit extends Activity
 						result.append(buffer, 0, read);
 					}
 				} while (read >= 0);
+                                System.out.println("....................... openFile CS: read: " + read);
 			}
 		} catch (FileNotFoundException e) {
 			// file not found
@@ -437,9 +446,12 @@ public class pmTextEdit extends Activity
 		
 		// now figure out the file format, nl, cr, crnl
 		if (!openingError)
-		{	
+		{
+                    System.out.println("....................... openFile CS: calling openFile");
 			openFile(fname, result);
 		}
+
+                System.out.println("....................... openFile CS: result: " + result);
 		
 		errorSaving = false;
 		if (text != null)
@@ -452,34 +464,49 @@ public class pmTextEdit extends Activity
 	 * 		opens a file, duh */
 	public void openFile(CharSequence fname, StringBuffer result)
 	{
+            System.out.println("....................... openFile CSSB: fname: " + fname);
+            System.out.println("....................... openFile CSSB: result: " + result);
 		try {
+                    System.out.println("....................... openFile CSSB: 1");
 			// have to do this first because it resets fileformat
-			createNew(); // to clear everything out
+			//createNew(); // to clear everything out
 			
 			String newText = result.toString();
-			
+
+                        System.out.println("....................... openFile CSSB: 2");
 			if (newText.indexOf("\r\n", 0) != -1)
 			{
+                            System.out.println("....................... FF: 1");
 				fileformat = FILEFORMAT_CRNL;
 				newText = newText.replace("\r", "");
 			} else if(newText.indexOf("\r", 0) != -1) {
+                            System.out.println("....................... FF: 2");
 				fileformat = FILEFORMAT_CR;
 				newText = newText.replace("\r", "\n");
 			} else {
+                            System.out.println("....................... FF: 3");
 				fileformat = FILEFORMAT_NL;
 			}
-						
+
+                        System.out.println("....................... openFile CSSB: 3");
 			// Okay, now we can set everything up
+
+                        System.out.println("....................... setting text: " + newText);
 			text.setText(newText);
 			title.setText(fname);
 
+                        System.out.println("....................... openFile CSSB: 4");
 			File f = new File(fname.toString());
 			lastModified = f.lastModified();
 			filename = fname;
 			untitled = false;
+
+                        System.out.println("....................... openFile CSSB: 5");
 			
 			addRecentFile(fname);
 			openingRecent = false;
+
+                        System.out.println("....................... openFile CSSB: 6");
 		
 		// this is just incase we get an error
 		} catch (Exception e) {
@@ -488,6 +515,7 @@ public class pmTextEdit extends Activity
 			showDialog(DIALOG_READ_ERROR);
 		}
 
+                System.out.println("....................... openFile CSSB: 7");
 		openingIntent = false;
 		temp_filename = "";
 	} // end openFile(CharSequence fname, StringBuffer result)
@@ -892,15 +920,15 @@ public class pmTextEdit extends Activity
 			createNew();
 		}		
 
-		// figure out if the the file has been previously modified
-		if (!creatingFile && !savingFile && !openingFile && !openingError && !openingRecent
-		 && !openingIntent && !sendingAttachment)
-		{
-			if (lastModified != 0 && lastModified != (new File(filename.toString())).lastModified())
-			{
-				showDialog(DIALOG_MODIFIED);
-			}
-		}
+		// // figure out if the the file has been previously modified
+		// if (!creatingFile && !savingFile && !openingFile && !openingError && !openingRecent
+		//  && !openingIntent && !sendingAttachment)
+		// {
+		// 	if (lastModified != 0 && lastModified != (new File(filename.toString())).lastModified())
+		// 	{
+		// 		showDialog(DIALOG_MODIFIED);
+		// 	}
+		// }
 	} // end onResume()
 
 	
