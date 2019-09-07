@@ -786,6 +786,14 @@ public class pmTextEdit extends Activity
 			editor.commit();
 		}
 
+                // Save
+                if (isTextChanged() && !untitled) {
+                    savingFile = true;
+                    saveNote(filename);
+                }
+                // Save
+
+
                 // View view = this.getCurrentFocus();
                 // if (view != null) {
                 //     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -812,6 +820,22 @@ public class pmTextEdit extends Activity
                 // This successfully re-opens the keyboard, but I'm currently looking for a way to avoid it being closed in the first place
                 //InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 //inputManager.toggleSoftInput (InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+
+                // Save
+                if (isTextChanged()) {
+                    savingFile = true;
+                    if (untitled) {
+                        if (autoComplete)
+                            showDialog(DIALOG_SAVE_FILE_AUTOCOMPLETE);
+                        else
+                            showDialog(DIALOG_SAVE_FILE);
+                    } else {
+                        saveNote(filename);
+                    }
+                }
+                // Save
+
 	}
 	
 	private void myResume()
