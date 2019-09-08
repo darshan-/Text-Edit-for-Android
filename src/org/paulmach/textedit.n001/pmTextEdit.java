@@ -623,6 +623,24 @@ public class pmTextEdit extends Activity
 		
 		text = (EditText) findViewById(R.id.note);
 		title = (TextView) findViewById(R.id.notetitle);
+                title.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        // Save
+                        if (isTextChanged()) {
+                            savingFile = true;
+                            if (untitled) {
+                                if (autoComplete)
+                                    showDialog(DIALOG_SAVE_FILE_AUTOCOMPLETE);
+                                else
+                                    showDialog(DIALOG_SAVE_FILE);
+                            } else {
+                                saveNote(filename);
+                            }
+                        }
+                        // Save
+                    }
+                });
+
 	
 		text.addTextChangedListener(new TextWatcher() {
 
