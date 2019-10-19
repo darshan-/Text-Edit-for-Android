@@ -805,10 +805,10 @@ public class pmTextEdit extends Activity
 		}
 
                 // Save
-                if (isTextChanged() && !untitled) {
-                    savingFile = true;
-                    saveNote(filename);
-                }
+                // if (isTextChanged() && !untitled) {
+                //     savingFile = true;
+                //     saveNote(filename);
+                // }
                 // Save
 
 
@@ -841,17 +841,17 @@ public class pmTextEdit extends Activity
 
 
                 // Save
-                if (isTextChanged()) {
-                    savingFile = true;
-                    if (untitled) {
-                        if (autoComplete)
-                            showDialog(DIALOG_SAVE_FILE_AUTOCOMPLETE);
-                        else
-                            showDialog(DIALOG_SAVE_FILE);
-                    } else {
-                        saveNote(filename);
-                    }
-                }
+                // if (isTextChanged()) {
+                //     savingFile = true;
+                //     if (untitled) {
+                //         if (autoComplete)
+                //             showDialog(DIALOG_SAVE_FILE_AUTOCOMPLETE);
+                //         else
+                //             showDialog(DIALOG_SAVE_FILE);
+                //     } else {
+                //         saveNote(filename);
+                //     }
+                // }
                 // Save
 
 	}
